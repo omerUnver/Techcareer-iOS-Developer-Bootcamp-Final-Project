@@ -51,7 +51,12 @@ class Anasayfa: UIViewController {
         let itemGenislik = (genislik - 30) / 2
         collectionViewLayout.itemSize = CGSize(width: itemGenislik, height: itemGenislik * 1.6)
         collectionView.collectionViewLayout = collectionViewLayout
+        let klavyeKapat = UITapGestureRecognizer(target: self, action: #selector(klavyeKapat))
+        self.view.addGestureRecognizer(klavyeKapat)
         
+    }
+    @objc func klavyeKapat(){
+        view.endEditing(true)
     }
     override func viewWillAppear(_ animated: Bool) {
         do {
@@ -87,7 +92,7 @@ class Anasayfa: UIViewController {
             }
         case 2:
             filteredData = yemeklerListesi.filter { tatli in
-                return ["Baklava", "Kafayıf", "Sütlaç", "Tiramisu"].contains(tatli.yemek_adi)
+                return ["Baklava", "Kadayıf", "Sütlaç", "Tiramisu"].contains(tatli.yemek_adi)
             }
         case 3 :
             filteredData = yemeklerListesi.filter{ icecekler in
@@ -95,23 +100,14 @@ class Anasayfa: UIViewController {
                 
             }
         default:
-            print("Secilen Yemk yok")
+            print("Secilen Yemek yok")
         }
         collectionView.reloadData()
         
         
         
     }
-    
-    @IBAction func cikisYap(_ sender: Any) {
-        do{
-            try Auth.auth().signOut()
-            print("Çıkış yapıldı.")
-        }catch{
-            print("Error")
-        }
-        
-    }
+   
     
 }
 

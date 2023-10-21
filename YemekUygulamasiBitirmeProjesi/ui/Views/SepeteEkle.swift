@@ -36,7 +36,7 @@ class SepeteEkle: UIViewController {
             
             
         }
-        self.siparisAdetLabel.text = ""
+        self.siparisAdetLabel.text = "0 Adet"
         self.backgroundView.layer.cornerRadius = 20
         
     }
@@ -46,7 +46,7 @@ class SepeteEkle: UIViewController {
         self.totalPrice = Int(stepperValue) * Int(yemekler!.yemek_fiyat)!
         self.siparisAdetLabel.text = "\(Int(sender.value)) Adet"
         if Int(stepperOutlet.value) == 0 {
-            self.siparisAdetLabel.text = ""
+            self.siparisAdetLabel.text = "0 Adet"
         }
         self.priceLabel.text = "\(totalPrice) ₺"
         

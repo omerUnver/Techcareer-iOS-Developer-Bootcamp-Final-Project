@@ -18,6 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favori Yemekleriniz Bulunmaktadır" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mA4-6h-unh">
+                                <rect key="frame" x="0.0" y="87" width="414" height="721"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zTa-8U-93I">
                                 <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -130,11 +137,12 @@
                     <navigationItem key="navigationItem" title="Favori Yemekleriniz" id="f8g-Nj-87I"/>
                     <connections>
                         <outlet property="collectionView" destination="zTa-8U-93I" id="EiN-gY-CZw"/>
+                        <outlet property="favoriYemeklerLabel" destination="mA4-6h-unh" id="g0f-8B-DWq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8y2-Xm-iFc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7475" y="-745"/>
+            <point key="canvasLocation" x="7473.9130434782619" y="-745.3125"/>
         </scene>
         <!--Yemekler Sepetimde-->
         <scene sceneID="tne-QT-ifu">
@@ -299,13 +307,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L8X-IB-NKB" secondAttribute="trailing" constant="11" id="r2B-3W-XGp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Yemekler Sepetimde" id="T9p-kQ-2uh">
-                        <barButtonItem key="rightBarButtonItem" title="Çıkış Yap" image="person.circle.fill" catalog="system" id="09L-os-DJX">
-                            <connections>
-                                <action selector="cikisYap:" destination="BYZ-38-t0r" id="ViP-Os-wCc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Yemekler Sepetimde" id="T9p-kQ-2uh"/>
                     <connections>
                         <outlet property="collectionView" destination="rVB-aD-kru" id="4mW-dc-JrZ"/>
                         <outlet property="searchBar" destination="sGK-71-bSa" id="UQs-Ol-bz0"/>
@@ -464,7 +466,13 @@
                             <constraint firstItem="EGe-rl-byN" firstAttribute="trailing" secondItem="sCN-g2-X7O" secondAttribute="trailing" constant="42" id="gv0-kx-XYl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sepetim" id="J4o-KN-jP8"/>
+                    <navigationItem key="navigationItem" title="Sepetim" id="J4o-KN-jP8">
+                        <barButtonItem key="rightBarButtonItem" title="Çıkış Yap" id="myK-C7-Cdw">
+                            <connections>
+                                <action selector="kullaniciCikisYapButton:" destination="Zn2-6k-7Us" id="gN2-Qg-ovh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ihg-bO-YXi" id="qaB-zo-Vbn"/>
                         <outlet property="totalPriceLabel" destination="D11-i5-VSl" id="rbC-3K-awD"/>
@@ -505,19 +513,19 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TVH-ZH-IaT">
                                         <rect key="frame" x="0.0" y="91" width="374" height="32"/>
                                         <segments>
-                                            <segment title="Log In"/>
-                                            <segment title="Create Account"/>
+                                            <segment title="Giriş Yap"/>
+                                            <segment title="Hesap Oluştur"/>
                                         </segments>
                                         <connections>
                                             <action selector="segmentedControllerAction:" destination="Lfy-Vr-xJ9" eventType="valueChanged" id="0On-CB-LqP"/>
                                         </connections>
                                     </segmentedControl>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zN-Id-Tbv">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-posta" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zN-Id-Tbv">
                                         <rect key="frame" x="0.0" y="172" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iFT-kB-4QO">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Şifre" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iFT-kB-4QO">
                                         <rect key="frame" x="0.0" y="256" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -525,7 +533,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dgr-s3-nch">
                                         <rect key="frame" x="0.0" y="340" width="374" height="34.5"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Log In">
+                                        <buttonConfiguration key="configuration" style="filled" title="Giriş Yap">
                                             <color key="baseBackgroundColor" red="0.84313726430000002" green="0.49411764740000003" blue="0.18039217590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -567,17 +575,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PsN-yv-Boc">
-                                <rect key="frame" x="188.5" y="687" width="37.5" height="18"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOn-js-y6C">
-                                        <rect key="frame" x="0.0" y="0.0" width="37.5" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="200" translatesAutoresizingMaskIntoConstraints="NO" id="5q1-VF-VXL">
                                 <rect key="frame" x="7" y="747" width="400" height="40.5"/>
                                 <subviews>
@@ -613,17 +610,12 @@
                                 <color key="backgroundColor" red="0.88235294819999999" green="0.92941176889999999" blue="0.97254902119999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="Gov-FL-eri" firstAttribute="leading" secondItem="Gj4-DS-UMa" secondAttribute="leading" constant="32" id="3Iv-kq-gjR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Gov-FL-eri" secondAttribute="bottom" constant="43" id="DIY-mf-eGV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gov-FL-eri" secondAttribute="trailing" constant="32" id="FG0-I5-kwS"/>
                                     <constraint firstItem="Gov-FL-eri" firstAttribute="centerX" secondItem="Gj4-DS-UMa" secondAttribute="centerX" id="qMt-uq-1Ae"/>
                                     <constraint firstItem="Gov-FL-eri" firstAttribute="top" secondItem="Gj4-DS-UMa" secondAttribute="top" constant="53" id="uJ5-jl-RF3"/>
                                 </constraints>
                             </view>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="aal-hE-7Sr">
-                                <rect key="frame" x="160" y="635" width="94" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="stepperButton:" destination="GIu-da-k64" eventType="valueChanged" id="EJs-Zk-mem"/>
-                                </connections>
-                            </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOE-Gk-NvL">
                                 <rect key="frame" x="170" y="482" width="74.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
@@ -636,22 +628,41 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="220" translatesAutoresizingMaskIntoConstraints="NO" id="PsN-yv-Boc">
+                                <rect key="frame" x="29" y="658" width="356" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOn-js-y6C">
+                                        <rect key="frame" x="0.0" y="6" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="aal-hE-7Sr">
+                                        <rect key="frame" x="262" y="0.0" width="94" height="32"/>
+                                        <connections>
+                                            <action selector="stepperButton:" destination="GIu-da-k64" eventType="valueChanged" id="EJs-Zk-mem"/>
+                                        </connections>
+                                    </stepper>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oCn-Vp-Jia"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="emn-8J-gkF" firstAttribute="centerX" secondItem="kOv-e4-EgJ" secondAttribute="centerX" id="6np-eC-B4k"/>
+                            <constraint firstItem="PsN-yv-Boc" firstAttribute="leading" secondItem="oCn-Vp-Jia" secondAttribute="leading" constant="29" id="7tN-IA-Is4"/>
                             <constraint firstItem="oCn-Vp-Jia" firstAttribute="trailing" secondItem="Gj4-DS-UMa" secondAttribute="trailing" constant="20" id="84D-Gz-5zX"/>
                             <constraint firstItem="ZOE-Gk-NvL" firstAttribute="centerX" secondItem="kOv-e4-EgJ" secondAttribute="centerX" id="98a-Oj-PVk"/>
                             <constraint firstItem="emn-8J-gkF" firstAttribute="top" secondItem="ZOE-Gk-NvL" secondAttribute="bottom" constant="28" id="EVb-z7-RMu"/>
                             <constraint firstItem="Gj4-DS-UMa" firstAttribute="leading" secondItem="oCn-Vp-Jia" secondAttribute="leading" constant="20" id="IQ3-hG-pGW"/>
+                            <constraint firstItem="oCn-Vp-Jia" firstAttribute="trailing" secondItem="PsN-yv-Boc" secondAttribute="trailing" constant="29" id="OaN-OB-YAL"/>
                             <constraint firstItem="Gj4-DS-UMa" firstAttribute="top" secondItem="oCn-Vp-Jia" secondAttribute="top" constant="9" id="SWs-uR-A0h"/>
                             <constraint firstItem="5q1-VF-VXL" firstAttribute="centerX" secondItem="kOv-e4-EgJ" secondAttribute="centerX" id="Ur0-zb-oXc"/>
                             <constraint firstAttribute="bottom" secondItem="ZOE-Gk-NvL" secondAttribute="bottom" constant="378" id="VeV-8X-7hu"/>
                             <constraint firstItem="ZOE-Gk-NvL" firstAttribute="top" secondItem="Gj4-DS-UMa" secondAttribute="bottom" constant="20" id="Ypj-Vc-fGe"/>
                             <constraint firstItem="oCn-Vp-Jia" firstAttribute="bottom" secondItem="5q1-VF-VXL" secondAttribute="bottom" constant="25.5" id="f2E-Ib-Yqw"/>
-                            <constraint firstItem="5q1-VF-VXL" firstAttribute="top" secondItem="PsN-yv-Boc" secondAttribute="bottom" constant="42" id="fn5-X5-Tvd"/>
-                            <constraint firstItem="ZOE-Gk-NvL" firstAttribute="centerX" secondItem="PsN-yv-Boc" secondAttribute="centerX" id="s7M-kE-ldR"/>
+                            <constraint firstItem="PsN-yv-Boc" firstAttribute="centerX" secondItem="kOv-e4-EgJ" secondAttribute="centerX" id="hgs-v6-g2q"/>
+                            <constraint firstItem="5q1-VF-VXL" firstAttribute="top" secondItem="PsN-yv-Boc" secondAttribute="bottom" constant="57" id="kDg-I8-4FK"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sepet" image="cart" catalog="system" id="sU3-kq-SWi"/>
@@ -759,7 +770,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jtz-cc-icm"/>
+        <segue reference="TNt-Cy-Pb8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
@@ -768,7 +779,6 @@
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="trash.fill" catalog="system" width="119" height="128"/>
         <namedColor name="YazıTipi">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

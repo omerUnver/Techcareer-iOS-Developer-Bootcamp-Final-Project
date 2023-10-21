@@ -11,6 +11,7 @@ import Kingfisher
 
 class FavoritesViewController: UIViewController {
     let context = appDelegate.persistentContainer.viewContext
+    @IBOutlet weak var favoriYemeklerLabel: UILabel!
     var favoriYemeklerListesi = [Favori]()
     var yemeklerListesi = [Yemekler]()
     var filteredData : [Yemekler] = []
@@ -46,6 +47,7 @@ class FavoritesViewController: UIViewController {
         collectionViewLayout.itemSize = CGSize(width: itemGenislik, height: itemGenislik * 1.6)
         collectionView.collectionViewLayout = collectionViewLayout
         
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         do {
@@ -55,6 +57,7 @@ class FavoritesViewController: UIViewController {
             print(error.localizedDescription)
         }
         anasayfaViewModel.yemekleriYukle()
+        
     }
     
 }

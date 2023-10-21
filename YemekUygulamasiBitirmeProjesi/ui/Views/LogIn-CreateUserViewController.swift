@@ -16,29 +16,35 @@ class LogIn_CreateUserViewController: UIViewController {
     var isLoginModel = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginModeLabel.text = "Log In"
+        loginModeLabel.text = "Giriş Yap"
+        let klavyeKapat = UITapGestureRecognizer(target: self, action: #selector(klavyeKapat))
+        self.view.addGestureRecognizer(klavyeKapat)
+        
+    }
+    @objc func klavyeKapat(){
+        view.endEditing(true)
     }
     
     @IBAction func segmentedControllerAction(_ sender: UISegmentedControl) {
         let segmentedIndex = sender.selectedSegmentIndex
         if segmentedIndex == 0 {
-            loginModeLabel.text = "Log In"
-            logInButtonLabel.setTitle("Log In", for: .normal)
+            loginModeLabel.text = "Giriş Yap"
+            logInButtonLabel.setTitle("Giriş Yap", for: .normal)
             
         } else {
-            loginModeLabel.text = "Create Account"
-            logInButtonLabel.setTitle("Create Account", for: .normal)
+            loginModeLabel.text = "Hesap Oluştur"
+            logInButtonLabel.setTitle("Hesap Oluştur", for: .normal)
         }
     }
     
     @IBAction func logInButton(_ sender: Any) {
         if segmentedConrollerOutlet.selectedSegmentIndex == 0 {
-            loginModeLabel.text = "Log In"
-            logInButtonLabel.setTitle("Log In", for: .normal)
+            loginModeLabel.text = "Giriş Yap"
+            logInButtonLabel.setTitle("Giriş Yap", for: .normal)
             if emailTextField.text != "" && passwordLabel.text != "" {
                 Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordLabel.text!) { result, error in
                     if error != nil {
-                        print(error?.localizedDescription)
+                        self.alertFunc(titleInput: "Hata!", messageInput: "Kullanıcı Adı/Şifre Yanlış Olabilir Lütfen Kontrol Ediniz")
                         
                     } else {
                         self.dismiss(animated: true)
@@ -47,12 +53,12 @@ class LogIn_CreateUserViewController: UIViewController {
                 }
                 
             } else {
-                self.alertFunc(titleInput: "Error!", messageInput: "Username/Password ?")
+                self.alertFunc(titleInput: "Hata!", messageInput: "Kullanıcı Adı/Şifre Bulunamadı")
             }
             
         } else {
-            loginModeLabel.text = "Create Account"
-            logInButtonLabel.setTitle("Create Account", for: .normal)
+            loginModeLabel.text = "Hesap Oluştur"
+            logInButtonLabel.setTitle("Hesap Oluştur", for: .normal)
             if emailTextField.text != "" && passwordLabel.text != "" {
                 guard let email = emailTextField.text, let password = passwordLabel.text else {
                     print("email veya password kontrolden geçemedi")
@@ -62,21 +68,21 @@ class LogIn_CreateUserViewController: UIViewController {
                     if error != nil {
                         print(error?.localizedDescription)
                     } else {
-                        self.alertFunc(titleInput: "Kullanıcı Oluşturuldu", messageInput: "Kullanıcı Oluşturma İşleminiz Başarılı Bir Şekil de Gerçekleşmiştir lütfen giriş yapınız.")
+                        self.alertFunc(titleInput: "Kullanıcı Oluşturuldu", messageInput: "Kullanıcı Oluşturma İşleminiz Başarılı Bir Şekilde Gerçekleşmiştir Lütfen Giriş Yapınız.")
                     }
                     
                     
                 }
                 
             } else {
-                alertFunc(titleInput: "Error!", messageInput: "Username/Password ? ")
+                alertFunc(titleInput: "Hata!", messageInput: "Kullanıcı Adı/Şifre Bulunamadı ")
             }
             
         }
     }
     func alertFunc(titleInput: String, messageInput: String){
         let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: UIAlertController.Style.alert)
-        let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        let okButton = UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil)
         alert.addAction(okButton)
         self.present(alert, animated: true, completion: nil)
     }

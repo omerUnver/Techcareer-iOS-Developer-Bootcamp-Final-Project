@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import Kingfisher
+import FirebaseAuth
 class SepetView: UIViewController {
     
     @IBOutlet weak var totalPriceLabel: UILabel!
@@ -37,12 +38,42 @@ class SepetView: UIViewController {
             
             
         })
+        self.navigationController?.navigationBar.tintColor = UIColor.systemRed
         
         
         self.sepetViewModel.sepetYemekler(kullanici_adi: "Omer Unver")
     }
     override func viewWillAppear(_ animated: Bool) {
         self.sepetViewModel.sepetYemekler(kullanici_adi: "Omer Unver")
+    }
+    
+    @IBAction func kullaniciCikisYapButton(_ sender: Any) {
+        if Auth.auth().currentUser != nil {
+            if let userEmail = Auth.auth().currentUser?.email {
+                let alert = UIAlertController(title: "Kullanıcı Çıkış Yapmak İstiyor", message: "\(userEmail) Çıkış Yapıyor", preferredStyle: .alert)
+                    let cikisYapButton = UIAlertAction(title: "Çıkış Yap", style: .destructive) { action in
+                        do {
+                            try Auth.auth().signOut()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        
+                    }
+                    let iptalButton = UIAlertAction(title: "İptal", style: .cancel)
+                    alert.addAction(iptalButton)
+                    alert.addAction(cikisYapButton)
+                    self.present(alert, animated: true)
+            }
+
+        } else {
+            let alert = UIAlertController(title: "Oturum Açılmamış", message: "Kullanıcı Oturumu Bulunamadı", preferredStyle: .alert)
+            let tamamButton = UIAlertAction(title: "Tamam", style: .default)
+            alert.addAction(tamamButton)
+            self.present(alert, animated: true)
+        }
+        
+        
+        
     }
     
     @IBAction func odemeButton(_ sender: Any) {
@@ -84,22 +115,23 @@ extension SepetView : UITableViewDelegate, UITableViewDataSource, SepetimProtoco
         cell.sepetimProtocol = self
         cell.layer.borderWidth = 5
         cell.layer.borderColor = UIColor.white.cgColor
-            cell.layer.cornerRadius = 10
-            cell.clipsToBounds = true
-            
-            return cell
-        }
+        cell.layer.cornerRadius = 10
+        cell.clipsToBounds = true
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return sepetListe.count
-        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sepetListe.count
+    }
+    
+    
+    
+    func sepettenSil(indexPath: IndexPath) {
+        let sepet = sepetListe[indexPath.row]
+        self.sepetViewModel.yemekSil(sepet_yemek_id: Int(sepet.sepet_yemek_id!)!, kullanici_adi: "Omer Unver")
+        self.tableView.reloadData()
         
-        
-        
-        func sepettenSil(indexPath: IndexPath) {
-            let sepet = sepetListe[indexPath.row]
-            self.sepetViewModel.yemekSil(sepet_yemek_id: Int(sepet.sepet_yemek_id!)!, kullanici_adi: "Omer Unver")
-            
-        }
+    }
     
 }
