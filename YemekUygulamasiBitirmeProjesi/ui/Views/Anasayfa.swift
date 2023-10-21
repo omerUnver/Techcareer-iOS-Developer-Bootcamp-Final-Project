@@ -51,12 +51,7 @@ class Anasayfa: UIViewController {
         let itemGenislik = (genislik - 30) / 2
         collectionViewLayout.itemSize = CGSize(width: itemGenislik, height: itemGenislik * 1.6)
         collectionView.collectionViewLayout = collectionViewLayout
-        let klavyeKapat = UITapGestureRecognizer(target: self, action: #selector(klavyeKapat))
-        self.view.addGestureRecognizer(klavyeKapat)
         
-    }
-    @objc func klavyeKapat(){
-        view.endEditing(true)
     }
     override func viewWillAppear(_ animated: Bool) {
         do {
